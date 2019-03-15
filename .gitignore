@@ -1,0 +1,15 @@
+bin/
+logs/
+temp/
+
+jars/*
+!jars/servers.dat
+!jars/server.properties
+
+src/minecraft/*
+!src/minecraft/verification
+
+src/minecraft_server/*
+!src/minecraft_server/verification
+
+*.class
