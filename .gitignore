@@ -13,3 +13,5 @@ src/minecraft_server/*
 !src/minecraft_server/verification
 
 *.class
+*.pyc
+eclipse/.metadata
