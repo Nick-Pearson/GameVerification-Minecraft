@@ -1,0 +1,22 @@
+entity Entity
+{
+  property int x;
+  property int y;
+  property int z;
+
+  property y > -1;
+  property y < 256;
+}
+
+entity Player extends Entity
+{
+  property bool grounded;
+
+  property bool inventoryOpen;
+  property int hotbarItem;
+
+  belief hotbarItem "curslot($)";
+
+  assert hotbarItem > -1;
+  assert hotbarItem < 10;
+}

@@ -1,0 +1,21 @@
+/*
+    jason
+    ---------------------------
+
+    Jason Project File
+
+    This file defines the initial state of the MAS
+
+    Jason 2.4-SNAPSHOT
+    March 14, 2019 - 18:40:36
+*/
+
+MAS jason
+{
+
+    infrastructure: Centralised
+
+    environment: verification.GameVerificationEnv
+
+    agents: menu_agent;
+}
