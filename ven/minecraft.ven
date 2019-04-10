@@ -4,8 +4,12 @@ entity Entity
   property int y;
   property int z;
 
-  property y > -1;
-  property y < 256;
+  believe x "posX($)";
+  believe y "posY($)";
+  believe z "posZ($)";
+
+  assert y > -1;
+  assert y < 256;
 }
 
 entity Player extends Entity
@@ -15,8 +19,29 @@ entity Player extends Entity
   property bool inventoryOpen;
   property int hotbarItem;
 
-  belief hotbarItem "curslot($)";
+  believe hotbarItem "curslot($)";
 
   assert hotbarItem > -1;
   assert hotbarItem < 10;
+
+  property int slot0;
+  believe slot0 "slot0($)";
+  property int slot1;
+  believe slot1 "slot1($)";
+  property int slot2;
+  believe slot2 "slot2($)";
+  property int slot3;
+  believe slot3 "slot3($)";
+  property int slot4;
+  believe slot4 "slot4($)";
+  property int slot5;
+  believe slot5 "slot5($)";
+  property int slot6;
+  believe slot6 "slot6($)";
+  property int slot7;
+  believe slot7 "slot7($)";
+  property int slot8;
+  believe slot8 "slot8($)";
+  property int slot9;
+  believe slot9 "slot9($)";
 }

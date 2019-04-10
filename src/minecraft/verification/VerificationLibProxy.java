@@ -40,6 +40,9 @@ public class VerificationLibProxy
 	native void propertyChanged_int(Object entityID, String property, int value);
 	native void propertyChanged_bool(Object entityID, String property, boolean value);
 	
+	public void linkEntityToAgent(EntityID entityID, String agentName) { linkEntityAgent(entityID, agentName); }
+	native void linkEntityAgent(Object entityID, String agentName);
+	
 	native void startDriving(String projectPath);
 	native void executeActions();
 	

@@ -13,6 +13,8 @@ public class VerificationEntity
 		proxy = VerificationLibProxy.get();
 	}
 	
+	public EntityID getID() { return entityID; }
+	
 	public void OnEntityCreated(String entityType) 
 	{
 		entityID = proxy.onEntitySpawned(entityType);
