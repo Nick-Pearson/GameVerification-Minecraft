@@ -10,6 +10,12 @@ entity Entity
 
   assert y > -1;
   assert y < 256;
+
+  property int pitch;
+  property int yaw;
+
+  believe pitch "pitch($)";
+  believe yaw "yaw($)";
 }
 
 entity Player extends Entity
@@ -44,4 +50,7 @@ entity Player extends Entity
   believe slot8 "slot8($)";
   property int slot9;
   believe slot9 "slot9($)";
+
+  property int viewItem;
+  believe viewItem "looking_at($)";
 }

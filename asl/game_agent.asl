@@ -8,17 +8,17 @@ menu(none).
 +start
    <- -start;
       releaseallkeys;
-      !mine(15, 270);
-      !mine(15, 274);
-      !mine(15, 257);
-      !mine(15, 285);
-      !mine(15, 278);
+      !mine(15, 270, 8000);
+      !mine(15, 274, 1500);
+      !mine(15, 257, 1000);
+      !mine(15, 285, 1500);
+      !mine(15, 278, 500);
       !menu_open(pause).
 
 /* Perceptions */
 
-+slot0(X) <- -slot(1, _); +slot(1, X); print("changed slot0").
-+slot1(X) <- -slot(2, _); +slot(2, X); print("changed slot1").
++slot0(X) <- -slot(1, _); +slot(1, X).
++slot1(X) <- -slot(2, _); +slot(2, X).
 +slot2(X) <- -slot(3, _); +slot(3, X).
 +slot3(X) <- -slot(4, _); +slot(4, X).
 +slot4(X) <- -slot(5, _); +slot(5, X).
@@ -37,7 +37,32 @@ menu(none).
       spress(R);
       srelease(R);
       -+menu(none);
-      +have(X).
+      wait(200).
+
+// *********** VIEW ***************
+
++!view_pitch(X) : pitch(X).
+
++!view_pitch(X) : pitch(Y)
+   <- if(X - Y > 20) {
+        mousemove(0, 50);
+      }
+     elif(X - Y > 5) {
+        mousemove(0, 20);
+      }
+      elif(X - Y > 0) {
+        mousemove(0, 5);
+      }
+      elif(X - Y < -20) {
+        mousemove(0, -50);
+      }
+      elif(X - Y < -5) {
+        mousemove(0, -20);
+      }
+      else {
+        mousemove(0, -5);
+      }
+      !view_pitch(X).
 
 // *********** HOLD ***************
 
@@ -47,7 +72,8 @@ menu(none).
 +!hold(X) : slot(Y, X)
    <- press(Y);
       release(Y);
-      -+curslot(Y).
+      .wait(200);
+      !hold(X).
 // item is in the inventory but we are not holding it
 +!hold(X) : have(X)
    <- !menu_open(inventory).
@@ -61,7 +87,12 @@ menu(none).
 +!look_at(X) : looking_at(X).
 
 +!look_at(X) : true
-   <- !hold(X).
+   <- !view_pitch(30);
+      !hold(X);
+      mousedown(R);
+      mouseup(R);
+      .wait(200);
+      !look_at(X).
 
 // *********** MENU ***************
 
@@ -91,6 +122,9 @@ menu(none).
 
 // *********** MINING ***************
 
-+!mine(X, Y)
++!mine(X, Y, Z)
    <- !look_at(X);
-      !hold(Y).
+      !hold(Y);
+      mousedown(L);
+      .wait(Z);
+      mouseup(L).
