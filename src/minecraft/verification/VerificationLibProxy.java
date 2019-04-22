@@ -42,6 +42,9 @@ public class VerificationLibProxy
 	
 	public void linkEntityToAgent(EntityID entityID, String agentName) { linkEntityAgent(entityID, agentName); }
 	native void linkEntityAgent(Object entityID, String agentName);
+
+	public void generatePlanForAgent(String agentName, String triggeringEvent) { generatePlanForAgent(agentName, triggeringEvent, "true"); }
+	public native void generatePlanForAgent(String agentName, String triggeringEvent, String context);
 	
 	native void startDriving(String projectPath);
 	native void executeActions();

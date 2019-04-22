@@ -5,15 +5,16 @@ menu(none).
 /* Initial goals */
 
 // !start.
+/*
 +start
-   <- -start;
+   <- --start;
       releaseallkeys;
       !mine(15, 270, 8000);
       !mine(15, 274, 1500);
       !mine(15, 257, 1000);
       !mine(15, 285, 1500);
       !mine(15, 278, 500);
-      !menu_open(pause).
+      */
 
 /* Perceptions */
 
@@ -29,7 +30,14 @@ menu(none).
 
 /* Plans */
 
-+!getitem(X)
++!clear_inventory
+   <- !menu_open(chat)
+      type("/clear @s");
+      spress(R);
+      srelease(R);
+      -+menu(none).
+
++!getitem(X) : slot(Y, 0)
    <- !menu_open(chat)
       functions.getBlockName(X, BLOCKNAME)
       .concat("/give @s ", BLOCKNAME, " 1", MSG);
@@ -37,7 +45,12 @@ menu(none).
       spress(R);
       srelease(R);
       -+menu(none);
-      wait(200).
+      .wait(200).
+
++!getitem(X)
+   <- !clear_inventory;
+      .wait(200);
+      !getitem(X).
 
 // *********** VIEW ***************
 
@@ -64,6 +77,29 @@ menu(none).
       }
       !view_pitch(X).
 
++!view_yaw(X) : yaw(X).
+
++!view_yaw(X) : yaw(Y)
+   <- if(X - Y > 20) {
+        mousemove(50, 0);
+      }
+     elif(X - Y > 5) {
+        mousemove(20, 0);
+      }
+      elif(X - Y > 0) {
+        mousemove(5, 0);
+      }
+      elif(X - Y < -20) {
+        mousemove(-50, 0);
+      }
+      elif(X - Y < -5) {
+        mousemove(-20, 0);
+      }
+      else {
+        mousemove(-5, 0);
+      }
+      !view_yaw(X).
+
 // *********** HOLD ***************
 
 // already holding the item
@@ -88,6 +124,10 @@ menu(none).
 
 +!look_at(X) : true
    <- !view_pitch(30);
+      !view_yaw(0);
+      press(d);
+      .wait(200);
+      release(d);
       !hold(X);
       mousedown(R);
       mouseup(R);
@@ -119,6 +159,12 @@ menu(none).
    <- spress(E);
       srelease(E);
       -+menu(none).
+
++!exit_to_menu
+   <- !menu_open(pause);
+      mousemovewr(0.5, 0.75);
+      mousedown(L);
+      mouseup(L).
 
 // *********** MINING ***************
 
